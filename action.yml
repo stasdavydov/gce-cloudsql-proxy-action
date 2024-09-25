@@ -6,9 +6,6 @@ branding:
   color: "red"
 
 inputs:
-  creds_path:
-    description: "Path to a Service Account JSON Key"
-    required: true
   instance:
     description: "CloudSQL instance"
     required: true
@@ -29,8 +26,7 @@ runs:
       run: |
         # write google application credentials to a temporary file to be used inside the container
         mkdir -p /tmp/gce-cloudsql-proxy
-        # echo '${{ inputs.creds }}' > /tmp/gce-cloudsql-proxy/key.json
-        cp ${{ inputs.creds_path }} /tmp/gce-cloudsql-proxy/key.json
+        ln -s ${{ env.GOOGLE_APPLICATION_CREDENTIALS }} /tmp/gce-cloudsql-proxy/key.json
 
         # start container
         docker run -d --net host --name gce-cloudsql-proxy --restart on-failure \
