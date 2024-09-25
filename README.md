@@ -15,7 +15,7 @@ or use a tool like [Terraform](https://www.terraform.io).
 
 | Variable                         | Description                                                                 |
 |----------------------------------|-----------------------------------------------------------------------------|
-| `creds`                          | ***Required*** Service Account JSON Key (not base64 encoded)                |
+| `creds_path`                     | ***Required*** Service Account JSON Key path                                |
 | `instance`                       | ***Required*** Cloud SQL connection name                                    |
 | `port`                           | Listen on port, default 5432                                                |
 | `proxy_version`                  | Cloud SQL Proxy version, default 1.21.0                                     |
@@ -26,7 +26,7 @@ or use a tool like [Terraform](https://www.terraform.io).
 ```
 uses: mattes/gce-cloudsql-proxy-action@v1
 with:
-  creds: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+  creds_path: ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
   instance: my-project:us-central1:instance-1
 ```
 
