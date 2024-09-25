@@ -26,7 +26,8 @@ runs:
       run: |
         # write google application credentials to a temporary file to be used inside the container
         mkdir -p /tmp/gce-cloudsql-proxy
-        ln -s ${{ env.GOOGLE_APPLICATION_CREDENTIALS }} /tmp/gce-cloudsql-proxy/key.json
+        cp ${{ env.GOOGLE_APPLICATION_CREDENTIALS }} /tmp/gce-cloudsql-proxy/key.json
+        chmod 666 /tmp/gce-cloudsql-proxy/key.json
 
         # start container
         docker run -d --net host --name gce-cloudsql-proxy --restart on-failure \
